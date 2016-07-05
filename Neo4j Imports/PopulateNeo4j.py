@@ -1,3 +1,5 @@
+#Batch importing consumed records into neo4j
+
 from py2neo import Graph
 import pandas as pd
 import random
