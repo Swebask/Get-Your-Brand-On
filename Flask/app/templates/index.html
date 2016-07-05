@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/d3-barchart.css') }}">
+<link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/d3-forcegraph.css') }}">
+<link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/index-page.css') }}">
+<link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+<meta charset="utf-8">
+
+
+<body>
+<div class="container">
+  <div class="row">
+    <div class="pull-left header">
+      <h3 class="title"><i class="icon-group"></i>Get Your Brand On</h3>
+    </div>
+  <!--.header-->
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+  <!--       <div class="row" style=" display: block;">
+    </br>
+    </br>
+     <div id="reachWidget"></div>
+     </div> -->
+      <div class="row" style=" display: block;">
+        <div id="tweetWidget" tweetId=""></div>
+      </div>
+  <!--/sidebar-nav-fixed -->
+    </div>
+<!--/span-->
+    <div class="col-md-7">
+      <div class="row" style=" display: block;">
+      </br>
+        <form id="searchWidget" class="navbar-form navbar-center" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" name="topic" placeholder="Search">
+          </div>
+          <button type="button" id="searchbutton" onclick="displayGraph()" class="btn btn-default">Search</button>
+        </form>
+      </div>
+      <div class="row" style=" display: block;">
+        <div id="graphWidget"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style=" display: block;">
+    <div class="col-md-12">
+      <div id="timeWidget" tweetId="">
+        <div id="graph" /></div>
+      </div>
+    </div>
+  </div>
+</div>
+        <!--/.fluid-container-->
+        <script>
+        </script>
+        <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+        <script src="../static/js/bootstrap.min.js"></script>
+        <script src="//d3js.org/d3.v3.min.js"></script>
+        <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+        <script sync src="https://platform.twitter.com/widgets.js"></script>
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script src="http://square.github.io/cubism/cubism.v1.js"></script>
+        <script src="../static/js/RenderGraph.js"></script>
+        <script src="../static/js/GraphFunctions.js"></script>
+        <script src="../static/js/DisplayGraph.js"></script>
+        <script src="../static/js/ReachStats.js"></script>
+        <script src="../static/js/TimeSeries.js"></script>
+
+</body>

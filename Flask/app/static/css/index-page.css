@@ -1,0 +1,15 @@
+
+.navbar-center
+{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+}
+
+#searchWidget
+{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    margin: auto;
