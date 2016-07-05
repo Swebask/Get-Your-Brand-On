@@ -88,5 +88,7 @@ class Consumer(object):
 if __name__ == '__main__':
 
     print "\nConsuming messages..."
-    cons = Consumer("localhost:9092","twitter_test")
+    with open("consumerconfig.yml", 'r') as ymlfileCons:
+        cfg = yaml.load(ymlfileCons)
+    cons = Consumer(['kafka']['topic']['users'],cfg['kafka']['broker_list'])
     cons.consume_topic("/home/ubuntu/Ingestion/kafka_messages")

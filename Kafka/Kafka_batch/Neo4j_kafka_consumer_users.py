@@ -2,28 +2,31 @@ import time
 import os
 from kafka import KafkaConsumer
 from py2neo import Graph
-
+import yaml
 
 class Consumer(object):
 
-    def __init__(self, topic):
+    def __init__(self, brokers, topic):
         #Initialize Consumer with kafka broker IP, and topic.
         self.file_path = None
         self.temp_file = None
         self.topic = topic
         self.block_cnt = 0
-        self.consumer = KafkaConsumer(topic, bootstrap_servers=addr)
+        self.consumer = KafkaConsumer(topic, bootstrap_servers=brokers)
 
     def consume_topic(self):
  
         timestamp = time.strftime('%Y%m%d%H%M%S')
+        hourstamp = time.strftime('%Y%m%d%H')
         # open file for writing
-        self.file_path = "%s/kafka_%s.csv" % (self.topic,timestamp)
+	if not os.path.exists(self.topic+'/'+hourstamp):
+    		os.makedirs(self.topic+'/'+hourstamp)
+        self.file_path = "%s/%s/kafka_%s.csv" % (self.topic,hourstamp,timestamp)
         self.temp_file = open(self.file_path,"w")
 
         while True:
             try:
-                self.temp_file.write("TweetId,CreatedAt,Tweet,ScreenName,FollowerCount\n")
+                self.temp_file.write("TweetId,CreatedAt,ScreenName,FollowerCount\n")
                 for message in self.consumer:
                     
                     self.temp_file.write(str(message.value))
@@ -49,9 +52,9 @@ class Consumer(object):
 if __name__ == '__main__':
 
     print ("\nConsuming messages...")
-    with open("consumerconfig.yml", 'r') as ymlfile:
+    with open("neo4jconfig.yml", 'r') as ymlfile:
         cfg = yaml.load(ymlfile)
     broker_list = cfg['kafka']['broker_list']
-    cons = Consumer(broker_list,cfg['kafka']['topic']['user'])
+    cons = Consumer(broker_list,cfg['kafka']['topic']['users'])
     cons.consume_topic()
 
