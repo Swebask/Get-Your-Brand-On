@@ -9,7 +9,7 @@ The <b>Functional </b>motivation for this project was to help build brand awaren
 The <b>Engineering</b> movitation behind building such a product is to demonstrate the ability to create a scalable big data pipeline to handle graph data and a real-time component.
 
 ## Data Pipeline
-![alt tag](https://raw.githubusercontent.com/aravindk1992/RedditR--Insight-Data-Engineering-Project/master/insightpipeline.png)
+![alt tag](https://raw.githubusercontent.com/Swebask/Get-Your-Brand-On/master/insightpipeline.png)
 
 <b> Kafka</b> was used as the publish-subscribe broker that ingestes data from the Twitter API.
 
