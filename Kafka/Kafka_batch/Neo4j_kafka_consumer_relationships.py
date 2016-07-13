@@ -6,13 +6,13 @@ import yaml
 
 class Consumer(object):
 
-    def __init__(self, servers, topic):
+    def __init__(self, servers, topic, group):
         #Initialize Consumer with kafka broker IP, and topic.
         self.file_path = None
         self.temp_file = None
         self.topic = topic
         self.block_cnt = 0
-        self.consumer = KafkaConsumer(topic, bootstrap_servers=servers)
+        self.consumer = KafkaConsumer(topic, group_id=group, bootstrap_servers=servers)
 
     def consume_topic(self):
  
@@ -28,7 +28,8 @@ class Consumer(object):
             try:
                 self.temp_file.write("Users,Followers\n")
                 for message in self.consumer:
-                    self.temp_file.write(str(message.value.split(',')[2])+','+str(message.value.split(',')[4]))
+            	    print message
+		    self.temp_file.write(str(message.value.split(',')[2])+','+str(message.value.split(',')[4]))
 
                 # file size > 20MB
                 if self.temp_file.tell() > 20000000:
@@ -54,6 +55,6 @@ if __name__ == '__main__':
     with open("neo4jconfig.yml", 'r') as ymlfile:
         cfg = yaml.load(ymlfile)
     broker_list = cfg['kafka']['broker_list']
-    cons = Consumer(broker_list,cfg['kafka']['topic']['followers'])
+    cons = Consumer(broker_list,cfg['kafka']['topic']['followers'],cfg['kafka']['group']['rels'])
     cons.consume_topic()
 

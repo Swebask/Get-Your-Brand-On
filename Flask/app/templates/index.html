@@ -6,49 +6,52 @@
 <meta charset="utf-8">
 
 
+
+
 <body>
 <div class="container">
   <div class="row">
-    <div class="pull-left header">
-      <h3 class="title"><i class="icon-group"></i>Get Your Brand On</h3>
+    <div class="col-md-7">
+      <div class="pull-left header">
+        <h3 class="title"><i class="icon-group"></i>Get Your Brand On</h3>
+      </div>
+    </div>
+    <div class="col-md-5">
+    </br>
+      <form id="searchWidget" class="navbar-form navbar-center" role="search">
+        <div class="form-group">
+        <input type="text" class="form-control" name="topic" placeholder="Search">
+        </div>
+        <button type="button" id="searchbutton" onclick="displayGraph()" class="btn btn-default">Search</button>
+      </form>
     </div>
   <!--.header-->
   </div>
-  <div class="row">
-    <div class="col-md-5">
-  <!--       <div class="row" style=" display: block;">
-    </br>
-    </br>
-     <div id="reachWidget"></div>
-     </div> -->
-      <div class="row" style=" display: block;">
-        <div id="tweetWidget" tweetId=""></div>
-      </div>
   <!--/sidebar-nav-fixed -->
-    </div>
 <!--/span-->
-    <div class="col-md-7">
-      <div class="row" style=" display: block;">
-      </br>
-        <form id="searchWidget" class="navbar-form navbar-center" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" name="topic" placeholder="Search">
-          </div>
-          <button type="button" id="searchbutton" onclick="displayGraph()" class="btn btn-default">Search</button>
-        </form>
-      </div>
-      <div class="row" style=" display: block;">
-        <div id="graphWidget"></div>
-      </div>
-    </div>
-  </div>
 
+  </br>
+  </br>
   <div class="row" style=" display: block;">
     <div class="col-md-12">
       <div id="timeWidget" tweetId="">
         <div id="graph" /></div>
       </div>
     </div>
+  </div>
+
+  <div class="row" style=" display: block;">
+    <div id="graphWidget"></div>
+  </div>
+
+
+  <div class="row" style=" display: block;">
+  <!--       <div class="row" style=" display: block;">
+    </br>
+    </br>
+     <div id="reachWidget"></div>
+     </div> -->
+    <div id="tweetWidget" tweetId=""></div>    
   </div>
 </div>
         <!--/.fluid-container-->

@@ -19,38 +19,38 @@ follower_auth.set_access_token(cfgProd['twitter']['follower']['atoken'], cfgProd
 api = tweepy.API(follower_auth)
 
 class Consumer(object):
-    def __init__(self, topic, bootstrapServers):
+    def __init__(self, topic, group, bootstrapServers):
         #Initialize Consumer with kafka broker IP, and topic.
         self.topic = topic
-        self.consumer = KafkaConsumer(topic, bootstrap_servers=bootstrapServers)
+        self.consumer = KafkaConsumer(topic,group_id=group,bootstrap_servers=bootstrapServers)
 
     def consume_topic(self):
-        while True:
+	while True:
             try:
-                for message in self.consumer:
-                    start_follower_stream(str(message.value))
+            	for message in self.consumer:
+		    start_follower_stream(str(message.value).strip('\n'))
             except:
                 print ("error")
 
 def start_follower_stream(tweet_info):
   while True:
     try:
-      #print tweet_info.split(',')[2], "user received"
+      print tweet_info.split(',')[2], "user received"
       user = api.get_user(tweet_info.split(',')[2])
       for follower in user.followers()[:10]:
         follower_screen_name = follower.screen_name
         producer.send(cfgProd['kafka']['topic']['followers'],tweet_info+","+str(follower_screen_name)+'\n')
-        #print follower_screen_name, "follower sent"
+        print follower_screen_name, "follower sent"
       return
     except tweepy.TweepError,e:
-      print e
+      print e, "error"
       time.sleep(60*15)
       pass  
     except Exception,e:
-      print e
+      print e, "error"
       time.sleep(10)
       pass
 
 if __name__ == "__main__":
-  cons = Consumer(cfgCons['kafka']['topic']['users'],cfgCons['kafka']['broker_list'])
+  cons = Consumer(cfgCons['kafka']['topic']['users'],cfgCons['kafka']['group'],cfgCons['kafka']['broker_list'])
   cons.consume_topic()

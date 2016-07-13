@@ -1,17 +1,24 @@
 function renderGraph(graph) {
-  var width = 600,
-      height = 400;
+  var width = 960,
+      height = 500;
 
   var color = d3.scale.category20();
 
+  var zoom = d3.behavior.zoom()
+    .scaleExtent([0.1, 7])
+    .on("zoom", redraw);
+
   var force = d3.layout.force()
-  .charge(-220)
-  .linkDistance(50)
+  .charge(-150)
+  .linkDistance(70)      
+  .friction(0.7)
   .size([width, height]);
 
   var svg = d3.select("#graphWidget").append("svg")
   .attr("width", width)
-  .attr("height", height);
+  .attr("height", height)
+  .call(zoom);
+
   force
     .nodes(graph.nodes)
     .links(graph.links)
@@ -45,6 +52,7 @@ function renderGraph(graph) {
   });
 
   force.on("tick", function() {
+
     link.attr("x1", function(d) {
       return d.source.x;
     })
@@ -65,5 +73,11 @@ function renderGraph(graph) {
       return d.y;
     });
   });
+
+  function redraw() {
+      svg.attr("transform",
+          "translate(" + d3.event.translate + ")"
+          + " scale(" + d3.event.scale + ")");  
+  }
 
 }

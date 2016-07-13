@@ -6,7 +6,7 @@ var context = cubism.context().step(1 * 1000).size(960)
 var horizon = context.horizon().extent([0,100])
   
 // draw graph
-var metrics = ["Reach"]
+var metrics = ["Reach: "]
 horizon.metric(random_ma(context,horizon));
  
 d3.select("#graph").selectAll(".horizon")
