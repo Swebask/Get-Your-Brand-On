@@ -3,6 +3,7 @@
 which is designed for people with strong knowledge of computer science fundamentals and coding skills to transition to data engineering by giving them a space to get hands-on experience building out distributed platforms on AWS using open source technologies <br/>
 Get Your Brand On is an application that harnesses both batch and stream processing to incrementally compute reach and the betweenness centrality scores of nodes in a twitter graph.
 You can find the app at <a href="http://swethabaskaran.site"> swethabaskaran.site</a>
+You can also view a video <a href="http://bit.do/swet">demo</a> and a <a href="http://bit.do/swet">presentation</a> explaining the motivation behind the problem, the pipeline and challenges faced 
 
 ## Motivation
 The <b>Functional </b>motivation for this project was to help build brand awareness by calculating reach of a hashtag/topic related to the brand in real time. Also it would be really interesting to identify the influencial users in the network, who can be potencial brand ambassadors.  <br/> 
