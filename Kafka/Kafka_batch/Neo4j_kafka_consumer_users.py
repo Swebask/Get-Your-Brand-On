@@ -1,3 +1,5 @@
+# Comsumer that writes uers into files for batch import into neo4j
+
 import time
 import os
 from kafka import KafkaConsumer

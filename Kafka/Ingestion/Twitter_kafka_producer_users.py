@@ -7,7 +7,6 @@ from kafka import KafkaProducer
 
 with open("producerconfig.yml", 'r') as ymlfile:
     cfg = yaml.load(ymlfile)
-#print cfg['kafka']['broker_list']
 producer = KafkaProducer(bootstrap_servers=cfg['kafka']['broker_list'])
 
 
@@ -20,7 +19,6 @@ class TweetStreamProducer(tweepy.StreamListener):
     if json_data['lang'] == "en":
       tweet_info = str(json_data['id'])+","+str(json_data['created_at'])+","+str(json_data['user']['screen_name'])+","+str(json_data['user']['followers_count'])
       producer.send(cfg['kafka']['topic']['users'],tweet_info+"\n")
-      #print json_data['created_at'], "user sent"
 
   def on_error(self, status_code):
     print >> sys.stderr, 'Encountered error with status code:', status_code

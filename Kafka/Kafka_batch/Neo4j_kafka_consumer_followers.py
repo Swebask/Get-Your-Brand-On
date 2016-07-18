@@ -1,3 +1,5 @@
+# Comsumer that writes followers into files for batch import into neo4j
+
 import time
 import os
 from kafka import KafkaConsumer
@@ -7,7 +9,7 @@ import yaml
 class Consumer(object):
 
     def __init__(self, brokers, topic):
-        #Initialize Consumer with kafka broker IP, and topic.
+        #Initialize Consumer with kafka broker IP, group and topic.
         self.file_path = None
         self.temp_file = None
         self.topic = topic

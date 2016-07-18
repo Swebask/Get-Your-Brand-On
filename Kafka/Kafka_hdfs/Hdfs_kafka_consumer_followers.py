@@ -28,29 +28,21 @@ class Consumer(object):
         while True:
             try:
                 # get 1000 messages at a time, non blocking
-                # OffsetAndMessage(offset=43, message=Message(magic=0,
-                # attributes=0, key=None, value='some message'))
+
                 for message in self.consumer:
                   self.temp_file.write(str(message.value) + "\n")
 
                 # file size > 20MB
                 if self.temp_file.tell() > 20000000:
                     self.flush_to_hdfs(output_dir)
-
-                #self.consumer.commit()
             except:
                 # move to tail of kafka topic if consumer is referencing
                 # unknown offset
                 print "error"
-                #self.consumer.seek(0, 2)
 
 
     def flush_to_hdfs(self, output_dir):
         """Flushes the 20MB file into HDFS.
-        Code template from https://github.com/ajmssc/bitcoin-inspector.git
-        Flushes the file into two folders under
-        hdfs://user/PuppyPlaydate/history and
-        hdfs://user/PuppyPlaydate/cached
         Args:
             output_dir: string representing the directory to store the 20MB
                 before transferring to HDFS

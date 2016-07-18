@@ -1,3 +1,5 @@
+// Force Directed Graph to show the reach network of a topic or hashtag
+
 function renderGraph(graph) {
   var width = 960,
       height = 500;
